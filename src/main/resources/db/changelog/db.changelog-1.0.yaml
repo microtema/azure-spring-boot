@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1466006862728-4
+      author: microtema
+      changes:
+        - createTable:
+            tableName: PROCESS_DEFINITION
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PROCESS_DEFINITION_PK
+                  name: ID
+                  type: NUMERIC
+              - column:
+                  name: DISPLAY_NAME
+                  type: VARCHAR2(255)
