@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Configuration;
 public class BlobStorageConfig {
 
     @Bean
-    BlobServiceClient blobServiceClient() {
+    BlobServiceClient blobServiceClient(BlobStorageProperties properties) {
 
         return new BlobServiceClientBuilder()
-                .connectionString("DefaultEndpointsProtocol=https;AccountName=microtema;AccountKey=SnbKHn2u3icuAoqPiR5Bw0mnDyYxV5GX/DKLY6AVRyMcrhcdc0MFuHBPjwUvUVRZpJVgOiYWzMX+Qarubeq4fw==;EndpointSuffix=core.windows.net")
+                .connectionString(properties.connectionString())
                 .buildClient();
     }
 }

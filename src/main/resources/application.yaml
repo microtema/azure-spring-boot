@@ -9,3 +9,10 @@ spring:
     check-template-location: false
 server:
   port: 9090
+
+blob-storage:
+  container: microtema
+service-bus:
+  queue-name: microtema.process.definition.queue
+  topic-name: microtema.process.definition.topic
+  topic-subscription: microtema.subscription

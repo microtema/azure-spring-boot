@@ -12,22 +12,22 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceBusConfig {
 
     @Bean
-    ServiceBusSenderClient serviceBusSenderQueueClient() {
+    ServiceBusSenderClient serviceBusSenderQueueClient(ServiceBusProperties properties) {
 
         return new ServiceBusClientBuilder()
-                .connectionString("Endpoint=sb://microtema.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=xL61ZJbUD3Ys2Q9Fc+a/VbN392Sr/zV+rmn8/c5/6b0=")
+                .connectionString(properties.connectionString())
                 .sender()
-                .queueName("microtema.process.definition.queue")
+                .queueName(properties.queueName())
                 .buildClient();
     }
 
     @Bean
-    ServiceBusProcessorClient serviceBusProcessorQueueClient(ProcessDefinitionQueueConsumer processDefinitionQueueConsumer) {
+    ServiceBusProcessorClient serviceBusProcessorQueueClient(ServiceBusProperties properties, ProcessDefinitionQueueConsumer processDefinitionQueueConsumer) {
 
         var serviceBusProcessorClient = new ServiceBusClientBuilder()
-                .connectionString("Endpoint=sb://microtema.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=xL61ZJbUD3Ys2Q9Fc+a/VbN392Sr/zV+rmn8/c5/6b0=")
+                .connectionString(properties.connectionString())
                 .processor()
-                .queueName("microtema.process.definition.queue")
+                .queueName(properties.queueName())
                 .processMessage(processDefinitionQueueConsumer::processMessage)
                 .processError(processDefinitionQueueConsumer::processError)
                 .buildProcessorClient();
@@ -38,23 +38,23 @@ public class ServiceBusConfig {
     }
 
     @Bean
-    ServiceBusSenderClient serviceBusSenderTopicClient() {
+    ServiceBusSenderClient serviceBusSenderTopicClient(ServiceBusProperties properties) {
 
         return new ServiceBusClientBuilder()
-                .connectionString("Endpoint=sb://microtema.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=xL61ZJbUD3Ys2Q9Fc+a/VbN392Sr/zV+rmn8/c5/6b0=")
+                .connectionString(properties.connectionString())
                 .sender()
-                .topicName("microtema.process.definition.topic")
+                .topicName(properties.topicName())
                 .buildClient();
     }
 
     @Bean
-    ServiceBusProcessorClient serviceBusSessionReceiverClient(ProcessDefinitionTopicConsumer processDefinitionConsumer) {
+    ServiceBusProcessorClient serviceBusSessionReceiverClient(ServiceBusProperties properties, ProcessDefinitionTopicConsumer processDefinitionConsumer) {
 
         var serviceBusProcessorClient = new ServiceBusClientBuilder()
-                .connectionString("Endpoint=sb://microtema.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=xL61ZJbUD3Ys2Q9Fc+a/VbN392Sr/zV+rmn8/c5/6b0=")
+                .connectionString(properties.connectionString())
                 .processor()
-                .topicName("microtema.process.definition.topic")
-                .subscriptionName("microtema.subscription")
+                .topicName(properties.topicName())
+                .subscriptionName(properties.topicSubscription())
                 .processMessage(processDefinitionConsumer::processMessage)
                 .processError(processDefinitionConsumer::processError)
                 .buildProcessorClient();

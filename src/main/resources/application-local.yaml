@@ -1,0 +1,4 @@
+blob-storage:
+  connection-string: "DefaultEndpointsProtocol=https;AccountName=microtema;AccountKey=SnbKHn2u3icuAoqPiR5Bw0mnDyYxV5GX/DKLY6AVRyMcrhcdc0MFuHBPjwUvUVRZpJVgOiYWzMX+Qarubeq4fw==;EndpointSuffix=core.windows.net"
+service-bus:
+  connection-string: "Endpoint=sb://microtema.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=xL61ZJbUD3Ys2Q9Fc+a/VbN392Sr/zV+rmn8/c5/6b0="
