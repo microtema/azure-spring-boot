@@ -1,2 +1,3 @@
 target/
-**/src/**/resources/*-local.yaml
+**/src/**/resources/application-local.yaml
+**/**/-local.yaml
